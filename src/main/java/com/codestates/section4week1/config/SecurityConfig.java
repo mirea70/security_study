@@ -1,5 +1,6 @@
 package com.codestates.section4week1.config;
 
+import com.codestates.section4week1.config.oauth.PrincipalOauth2UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +18,9 @@ public class SecurityConfig {
 //    @Autowired
 //    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    @Autowired
+    private PrincipalOauth2UserService principalOauth2UserService;
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable();
@@ -29,7 +33,13 @@ public class SecurityConfig {
                 .anyRequest().permitAll() // anyRequest : 설정된 값 이외 URL
                 .and()
                 .formLogin()
-                .loginPage("/login");
+                .loginPage("/login")
+                .defaultSuccessUrl("/")
+                .and()
+                .oauth2Login()
+                .loginPage("/login")
+                .userInfoEndpoint()
+                .userService(principalOauth2UserService);
         return http.build();
     }
 
