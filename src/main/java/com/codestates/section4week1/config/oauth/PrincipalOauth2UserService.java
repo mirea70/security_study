@@ -42,7 +42,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
             memberRepository.save(memberEntity);
         }
 
-        return new PrincipalDetails(memberEntity);
+        return new PrincipalDetails(memberEntity, oAuth2User.getAttributes());
 
 //        System.out.println("userRequest : " + userRequest);
 //        return super.loadUser(userRequest);

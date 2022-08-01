@@ -20,11 +20,11 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
         this.member = member;
     }
 
-//    public PrincipalDetails(Member member, Map<String, Object> attributes)
-//    {
-//        this.member = member;
-//        this.attributes = attributes;
-//    }
+    public PrincipalDetails(Member member, Map<String, Object> attributes)
+    {
+        this.member = member;
+        this.attributes = attributes;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -40,7 +40,7 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
 
     @Override
     public Map<String, Object> getAttributes() {
-        return null;
+        return attributes;
     }
 
     @Override
